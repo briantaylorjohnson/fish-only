@@ -8,6 +8,9 @@ const fishController = require("../../controllers/Fish");
 // Retrieve FishOnly.com fishing reports saved to AWS DynamoDB
 router.get("/fish", fishController.getReports);
 
+// Retrieve FishOnly.com fishing reports saved to AWS DynamoDB
+router.post("/fish", fishController.postReport);
+
 // Create FishOnly.com user
 router.post("/createUser", fishController.createUser);
 
