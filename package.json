@@ -1,0 +1,28 @@
+{
+  "name": "fish-only",
+  "version": "1.0.0",
+  "description": "GT Coding Bootcamp - Project 3 for Brian Taylor Johnson",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/briantaylorjohnson/fish-only.git"
+  },
+  "author": "BTJ",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/briantaylorjohnson/fish-only/issues"
+  },
+  "homepage": "https://github.com/briantaylorjohnson/fish-only#readme",
+  "dependencies": {
+    "aws-sdk": "^2.551.0",
+    "axios": "^0.19.0",
+    "bcrypt": "^3.0.6",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "path": "^0.12.7"
+  }
+}
