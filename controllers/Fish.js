@@ -26,8 +26,6 @@ exports.getReports = (req, res) =>
     
     var table = "reports";
     
-    var year = 2019;
-    
     var params = {
         TableName: table,
         Key:{
@@ -55,6 +53,7 @@ exports.getReports = (req, res) =>
 // Creates a new FishOnly.com user
 exports.createUser = (req, res) =>
 {
+    // Encrypts the password through 10 SALT rounnds
     bcrypt.hash(req.body.password, 10, function(sec_err, hash)
     {
         var docClient = new AWS.DynamoDB.DocumentClient();
@@ -73,8 +72,10 @@ exports.createUser = (req, res) =>
             }
         };
 
+        // Queries AWS DynamoDB with the above parameters
         docClient.query(params, (check_err, data) => 
         {
+            // Checks to see if any errors occured while attempting to query AWS DynamoDB
             if (check_err)
             {
                 res.json(
@@ -86,6 +87,7 @@ exports.createUser = (req, res) =>
                 });
             }
 
+            // Checks to see if the username already exists or is in use/taken
             else if (data.Count > 0)
             {
                 res.json(
@@ -96,6 +98,7 @@ exports.createUser = (req, res) =>
                 });  
             }
 
+            // If no errors occurred during the invocation of AWS DynamoDB and the username is not already used, an attempt will be made to add the user to the AWS DynamoDB table
             else
             {
                 params =
@@ -113,6 +116,7 @@ exports.createUser = (req, res) =>
                     }
                 };
 
+                // Creates a new user in AWS DynamoDB with the above parameters
                 docClient.put(params, function(save_err, data)
                 {
                     if (save_err)
@@ -159,6 +163,7 @@ exports.authUser = (req, res) =>
         }
     };
 
+    // Queries AWS DynamoDB with the above parameters
     docClient.query(params, function(auth_err, data)
     {   
         // Checks to see if any errors occured while attempting to send auth parameters to AWS DynamoDB
@@ -192,6 +197,7 @@ exports.authUser = (req, res) =>
                 // Decrypts the stored password and compares it to the password provided at sign in
                 bcrypt.compare(req.body.password, data.Items[0].password, function(sec_err, response)
                 {
+                    // Conditional if the passwords are an exact match
                     if(response)
                     {
                         res.json(
@@ -199,8 +205,16 @@ exports.authUser = (req, res) =>
                             "Code": 200,
                             "Outcome": "Success",
                             "Message": "User has been successfully authenticated.",
+                            "Profile":
+                            {
+                                "username": data['Items'][0]['user-id'],
+                                "firstName": data['Items'][0]['firstName']
+                            }
                         });
+
                     }
+
+                    // Conditional if the passwords do not match
                     else
                     {
                         res.json(
