@@ -17,4 +17,7 @@ router.post("/createUser", fishController.createUser);
 // Authenticate FishOnly.com user
 router.post("/authUser", fishController.authUser);
 
+// Update FishOnly.com user profile attributes
+router.post("/updateUser", fishController.updateUserAttribute);
+
 module.exports = router;
