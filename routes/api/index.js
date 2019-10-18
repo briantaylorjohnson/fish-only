@@ -11,6 +11,9 @@ router.get("/fish", fishController.getReports);
 // Retrieve FishOnly.com fishing reports saved to AWS DynamoDB
 router.post("/fish", fishController.postReport);
 
+// Update FishOnly.com user profile attributes
+router.post("/deleteReport", fishController.deleteReport);
+
 // Create FishOnly.com user
 router.post("/createUser", fishController.createUser);
 

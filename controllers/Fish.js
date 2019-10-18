@@ -150,6 +150,45 @@ exports.postReport = (req, res) =>
     });
 }
 
+// Delete a FishOnly.com fishing report
+exports.deleteReport = (req, res) =>
+{
+    let docClient = new AWS.DynamoDB.DocumentClient();
+    
+    let params = 
+    {
+        TableName: "reports",
+        Key: {"report-id": req.body.reportId},
+        UpdateExpression: "set #del = :d",
+        ExpressionAttributeNames:
+        {
+            "#del": "deleted"
+        },
+        ExpressionAttributeValues: {":d": true},
+    }
+
+    docClient.update(params, function(delete_err, data) 
+    {
+        if (delete_err) {
+            res.json(
+            {
+                "code": 500,
+                "outcome": "Error",
+                "message": "Error encountered deleting fishing report: " + req.body.reportId + ".",
+                "details": delete_err
+            });
+
+        } else {
+            res.json(
+            {
+                "code": 200,
+                "outcome": "Success",
+                "message": "The fishing report has been deleted: " + req.body.reportId + ".",
+            });
+        }
+    });
+}
+
 // Creates a new FishOnly.com user
 exports.createUser = (req, res) =>
 {
@@ -331,21 +370,17 @@ exports.authUser = (req, res) =>
     });
 }
 
+// Updates a FishOnly.com user profile attributes
 exports.updateUserAttribute = (req, res) =>
 {
-    let docClient = new AWS.DynamoDB.DocumentClient(
-    {
-        httpOptions:
-        {
-            timeout: 5000
-        }
-    });
+    let docClient = new AWS.DynamoDB.DocumentClient();
 
     let expression = "";
     let attr = "";
     let alias = "";
     let attribute = "";
 
+    // This switch allows for one API call to be used to update user attributes with AWS DynamoDB
     switch (req.body.attrName)
     {
         case "email":
@@ -403,8 +438,11 @@ exports.updateUserAttribute = (req, res) =>
         ExpressionAttributeValues: {[attr]: req.body.attrValue},
     }
 
-    docClient.update(params, function(update_err, data) {
-        if (update_err) {
+    // Updates a FishOnly.com user's attributes in the AWS DynanoDB table given the above parameters
+    docClient.update(params, (update_err, data) =>
+    {
+        if (update_err)
+        {
             res.json(
             {
                 "code": 500,
@@ -413,7 +451,8 @@ exports.updateUserAttribute = (req, res) =>
                 "details": update_err
             });
 
-        } else {
+        } else
+        {
             res.json(
             {
                 "code": 200,
