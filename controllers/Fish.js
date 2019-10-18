@@ -37,7 +37,7 @@ exports.getReports = (req, res) =>
         {
             res.json(
             {
-                "code": 404,
+                "code": 500,
                 "outcome": "Error",
                 "message": "Error retrieving fishing reports from AWS DynamoDB table.",
                 "details": auth_err
@@ -81,7 +81,7 @@ exports.postReport = (req, res) =>
         {
             res.json(
             {
-                "code": 404,
+                "code": 500,
                 "outcome": "Error",
                 "message": "Error counting fishing reports from AWS DynamoDB table.",
                 "details": auth_err
@@ -130,7 +130,7 @@ exports.postReport = (req, res) =>
                 {
                     res.json(
                     {
-                        "code": 404,
+                        "code": 500,
                         "outcome": "Error",
                         "message": "Error posting new fishing report - " + reportId + ".",
                         "details": save_err
@@ -180,7 +180,7 @@ exports.createUser = (req, res) =>
             {
                 res.json(
                 {
-                    "code": 404,
+                    "code": 500,
                     "outcome": "Error",
                     "message": "Error verifying username in AWS DynamoDB table.",
                     "details": check_err
@@ -192,7 +192,7 @@ exports.createUser = (req, res) =>
             {
                 res.json(
                 {
-                    "code": 402,
+                    "code": 400,
                     "outcome": "Error",
                     "message": "Username aleady exists in AWS DynamoDB table."
                 });  
@@ -223,7 +223,7 @@ exports.createUser = (req, res) =>
                     {
                         res.json(
                         {
-                            "code": 404,
+                            "code": 500,
                             "outcome": "Error",
                             "message": "Error adding new user - " + req.body.username + ".",
                             "details": save_err
@@ -271,7 +271,7 @@ exports.authUser = (req, res) =>
         {
             res.json(
             {
-                "code": 404,
+                "code": 500,
                 "outcome": "Error",
                 "message": "Error verifying username in AWS DynamoDB table.",
                 "details": auth_err
@@ -327,6 +327,99 @@ exports.authUser = (req, res) =>
                     } 
                 });
             }
+        }
+    });
+}
+
+exports.updateUserAttribute = (req, res) =>
+{
+    let docClient = new AWS.DynamoDB.DocumentClient(
+    {
+        httpOptions:
+        {
+            timeout: 5000
+        }
+    });
+
+    let expression = "";
+    let attr = "";
+    let alias = "";
+    let attribute = "";
+
+    switch (req.body.attrName)
+    {
+        case "email":
+            expression = "set #em = :e";
+            attr = ":e";
+            attribute = "email";
+            alias = "#em";
+            break;
+
+        case "firstName":
+            expression = "set #fn = :f";
+            attr = ":f";
+            attribute = "firstName";
+            alias = "#fn";
+            break;
+        
+        case "lastName":
+            expression = "set #ln = :l";
+            attr = ":l";
+            attribute = "lastName";
+            alias = "#ln";
+            break;
+
+        case "city":
+            expression = "set #ci = :c";
+            attr = ":c";
+            attribute = "city";
+            alias = "#ci";
+            break;
+
+        case "state":
+            expression = "set #st = :s";
+            attr = ":s";
+            attribute = "state";
+            alias = "#st";
+            break;
+
+        case "zipCode":
+            expression = "set #zi = :z";
+            attr = ":z";
+            attribute = "zip"
+            alias = "#zi";
+            break;
+    }
+
+    let params = 
+    {
+        TableName: "users",
+        Key: {"user-id": req.body.username},
+        UpdateExpression: expression,
+        ExpressionAttributeNames:
+        {
+            [alias]: attribute
+        },
+        ExpressionAttributeValues: {[attr]: req.body.attrValue},
+    }
+
+    docClient.update(params, function(update_err, data) {
+        if (update_err) {
+            res.json(
+            {
+                "code": 500,
+                "outcome": "Error",
+                "message": "Error encountered updating user attribute: " + req.body.attrName + ".",
+                "details": update_err
+            });
+
+        } else {
+            res.json(
+            {
+                "code": 200,
+                "outcome": "Success",
+                "message": "User attribute successfully updated: " + req.body.attrName + ".",
+            });
         }
     });
 }
