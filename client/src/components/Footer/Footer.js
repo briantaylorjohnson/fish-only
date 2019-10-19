@@ -4,8 +4,8 @@ import "./Footer.css";
 // Creates Footer component
 function Footer() {
   return (
-    <div className="background bg-success">
-        Footer Here
+    <div className="footer-color text-center mt-3">
+        <small className="footer-text">Copyright 2019 - Taylor Johnson</small>
     </div>
   );
 }
