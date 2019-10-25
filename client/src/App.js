@@ -1,4 +1,39 @@
-import React from 'react';
+// src/App.js
+
+import React from "react";
+import NavBar from "./components/Nav";
+import Profile from "./components/Profile";
+import { useAuth0 } from "./react-auth0-spa";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+
+function App() {
+  const { loading } = useAuth0();
+
+  if (loading) {
+    return (
+      <div>Loading...</div>
+    );
+  }
+
+  return (
+    <div className="App">
+      {/* New - use BrowserRouter to provide access to /profile */}
+      <BrowserRouter>
+        <header>
+          <NavBar />
+        </header>
+        <Switch>
+          <Route path="/" exact />
+          <Route path="/profile" component={Profile} />
+        </Switch>
+      </BrowserRouter>
+    </div>
+  );
+}
+
+export default App;
+
+/*import React from 'react';
 import Nav from "./components/Nav";
 import Public from "./screens/Public";
 import Reports from "./screens/Reports";
@@ -24,10 +59,10 @@ class App extends React.Component
       <div>
         <div className="container">
           
-          {/* Navigation */}
+
           <Nav />
           
-          {/* Router */}
+
           <Router>
             <Switch>
               <Route exact path="/" render={(props) => <Public {...props} loggedIn={this.state.loggedIn} username={this.state.username} name={this.state.name} password={this.state.password} />} />
@@ -37,7 +72,6 @@ class App extends React.Component
             </Switch>
           </Router>
 
-          {/* Footer */}
           <Footer />
         </div>
       </div>
@@ -46,3 +80,5 @@ class App extends React.Component
 }
 
 export default App;
+
+*/
