@@ -10,17 +10,13 @@ import './App.css';
 
 class App extends React.Component
 {
-  constructor(props)
-  {
-    super(props)
-    this.state =
+    state =
     {
       loggedIn: false,
       username: "tswizz",
       name: "",
       password: ""
     };
-  }
 
   render()
   {

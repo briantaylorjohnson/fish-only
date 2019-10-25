@@ -12,9 +12,11 @@ class Login extends React.Component
     this.state =
     {}
 
+    this.checkCookie = this.checkCookie.bind(this);
     this.handleUsername = this.handleUsername.bind(this);
     this.handlePassword = this.handlePassword.bind(this);
     this.handleAuth = this.handleAuth.bind(this);
+    this.setCookie = this.setCookie.bind(this);
   }
 
   handleUsername(u)
@@ -38,12 +40,54 @@ class Login extends React.Component
       if (data.data.code === 200)
       {
         console.log("Success");
+        console.log(this.props.loggedIn);
+
+
+        this.setState({loggedIn: true});
+        this.setCookie("id", this.state.username);
+
+        //window.location.assign("/reports");
+
       }
       else
       {
         console.log("Fail");
       }
     });
+  }
+
+  setCookie = (cname, cvalue) =>
+  {
+    let d = new Date();
+    d.setTime(d.getTime() + (0.0417*24*60*60*1000));
+    let expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+
+    console.log("Cookie set with name of " + cname + " and value of " + cvalue + "."); 
+  }
+
+  checkCookie = (cname) =>
+  {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie); // Retrieves cookie string from browser cookies by decoding it
+    let ca = decodedCookie.split(';'); // Creates an array of all name/value pairs in the cookie string
+    
+    // For loop which iterates through the cookies array to find the desired cookie value
+    for (var i = 0; i <ca.length; i++)
+    {
+      var c = ca[i];
+
+      while (c.charAt(0) === ' ')
+      {
+        c = c.substring(1);
+      }
+
+      if (c.indexOf(name) === 0)
+      {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
   }
 
 render()
