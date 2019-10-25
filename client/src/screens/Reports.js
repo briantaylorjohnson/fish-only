@@ -1,5 +1,6 @@
 import React from "react";
 import "./Screens.css";
+import Report from "../components/Report"
 
 class Reports extends React.Component
 {
@@ -16,7 +17,7 @@ class Reports extends React.Component
     {
         return(
             <div>
-                Fishing Reports Here
+                <Report />
             </div>
         )
     }
