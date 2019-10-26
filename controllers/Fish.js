@@ -21,11 +21,12 @@ exports.getReports = (req, res) =>
     let params = 
     {
         TableName: "reports",
-        FilterExpression: "#username = :val",
+        FilterExpression: "#username = :val and #deleted = :bool",
         ExpressionAttributeNames: {
-            "#username":"user-id"
+            "#username":"user-id",
+            "#deleted":"deleted"
         },
-        ExpressionAttributeValues: {":val": req.body.username},
+        ExpressionAttributeValues: {":val": req.body.username, ":bool": false},
         ReturnConsumedCapacity: "TOTAL"
     };
 

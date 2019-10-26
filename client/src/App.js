@@ -29,7 +29,7 @@ function App() {
 
           <Modal.Body>
             <div className="text-center">
-              <p className="text-center">Logging in...</p>
+              <p className="text-center">Loading...</p>
               <div className="spinner-border text-center" role="status">
                 <span className="sr-only text-center">Loading...</span>
               </div>
