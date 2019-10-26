@@ -32,7 +32,7 @@ const Nav = () => {
             <a className="nav-item nav-link" href="/reports">Fishing Reports</a>
             <a className="nav-item nav-link" href="/tackle">Tackle Box</a>
             <a className="nav-item nav-link" href="/profile">Profile</a>
-            <a className="nav-item nav-link logout-point" href="/" onClick={() => logout()}>Log Out</a>
+            <a className="nav-item nav-link logout-point" onClick={() => logout()}>Log Out</a>
           </div>
         </div>
       </nav>

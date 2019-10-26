@@ -13,97 +13,103 @@ class Report extends React.Component
         }
     }
 
+    componentDidMount()
+    {
+        console.log("Props");
+        console.log(this.props);
+    }
+
     render()
     {
         return (
             <div className="container border bd-dark mt-3 mb-3">
                 <div className="row">
-                    <div className="col-sm-12 report-location">
-                        Alligator Reef Light House
+                    <div className="col-md-12 report-location">
+                        {this.props.location}
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-sm-12 report-date-time">
-                        June 15, 2018 -- 16:14 EDT
+                    <div className="col-md-12 report-date-time">
+                        {this.props.date} -- {this.props.time}
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-sm-6 geolocate">
+                    <div className="col-md-6 geolocate">
                         <small>Pinpoint on Google Maps</small>
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-sm-12">
+                    <div className="col-md-12">
                         <div className="container">
                             <div className="row pt-2">
 
                                 {/* Species */}
-                                <div className="col-sm-6 mt-1">
+                                <div className="col-md-6 mt-1">
                                     <div className="container border bd-dark">
                                         <div className="row">
-                                            <div className="col-sm-6 bold-text">
+                                            <div className="col-md-6 bold-text">
                                                 Catch
                                             </div>
                                         </div>
                                         <div className="row">
-                                            <div className="col-sm-6">
-                                                <small>Species: </small>
+                                            <div className="col-md-12">
+                                                <small>Species: {this.props.species}</small>
                                             </div>
                                         </div>
                                         <div className="row">
-                                            <div className="col-sm-6">
-                                                <small>Color: </small> 
+                                            <div className="col-md-12">
+                                                <small>Color: {this.props.color}</small> 
                                             </div>
                                         </div>
                                         <div className="row">
-                                            <div className="col-sm-6">
-                                                <small>Weight (lbs): </small>
+                                            <div className="col-md-12">
+                                                <small>Weight (lbs): {this.props.weight}</small>
                                             </div>
                                         </div>
                                         <div className="row">
-                                            <div className="col-sm-6">
-                                                <small>Length (in): </small>
+                                            <div className="col-md-12">
+                                                <small>Length (in): {this.props.length}</small>
                                             </div>
                                         </div>
                                         <div className="row">
-                                            <div className="col-sm-6">
-                                                <small>Released: </small>
+                                            <div className="col-md-12">
+                                                <small>Released: {this.props.released}</small>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
                                 {/* Conditions */}
-                                <div className="col-sm-6 mt-1">
+                                <div className="col-md-6 mt-1">
                                     <div className="container border bd-dark">
                                         <div className="row">
-                                            <div className="col-sm-6 bold-text">
+                                            <div className="col-md-6 bold-text">
                                                 Conditions
                                             </div>
                                         </div>
                                         <div className="row">
-                                            <div className="col-sm-6">
-                                                <small>Weather: </small>
+                                            <div className="col-md-12">
+                                                <small>Weather: {this.props.weather}</small>
                                             </div>
                                         </div>
                                         <div className="row">
-                                            <div className="col-sm-6">
-                                                <small>Air Temp. (f): </small>
+                                            <div className="col-md-12">
+                                                <small>Air Temp. (f): {this.props.airTemp}</small>
                                             </div>
                                         </div>
                                         <div className="row">
-                                            <div className="col-sm-6">
-                                                <small>Water Temp. (f): </small>
+                                            <div className="col-md-12">
+                                                <small>Water Temp. (f): {this.props.waterTemp}</small>
                                             </div>
                                         </div>
                                         <div className="row">
-                                            <div className="col-sm-6">
-                                                <small>Wind Direction: </small>
+                                            <div className="col-md-12">
+                                                <small>Wind Direction: {this.props.windDirection}</small>
                                             </div>
                                         </div>
                                         <div className="row">
-                                            <div className="col-sm-6">
-                                                <small>Wind Speed (kts): </small>
+                                            <div className="col-md-12">
+                                                <small>Wind Speed (kts): {this.props.windSpeed}</small>
                                             </div>
                                         </div>
                                     </div>
@@ -111,28 +117,28 @@ class Report extends React.Component
                             </div>
                             
                             <div className="row pb-3">
-                                <div className="col-sm-6">
+                                <div className="col-md-12">
                                     <div className="container border bd-dark mt-1">
                                         <div className="row">
-                                            <div className="col-sm-12 bold-text">
+                                            <div className="col-md-12 bold-text">
                                                 <small>
-                                                    <span className="bold-text">Tackle: </span>Rigged ballyhoo on light spinning rods.
+                                                    <span className="bold-text">Tackle: </span><br />{this.props.tackle}
                                                 </small>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col-sm-6">
-                                    <div className="container border bd-dark mt-1">
-                                        <div className="row">
-                                            <div className="col-sm-12 bold-text">
-                                                <small>
-                                                    <span className="bold-text">Notes: </span>Lots of birds following weed lines around the hump.
-                                                </small>
+                                    <div className="col-md-12">
+                                        <div className="container border bd-dark mt-1">
+                                            <div className="row">
+                                                <div className="col-md-12 bold-text">
+                                                    <small>
+                                                        <span className="bold-text">Notes: </span><br />{this.props.notes}.
+                                                    </small>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                             </div>
                         </div>
                 </div>
