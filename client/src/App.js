@@ -30,9 +30,8 @@ function App() {
           <Modal.Body>
             <div className="text-center">
               <p className="text-center">Loading...</p>
-              <div className="spinner-border text-center" role="status">
-                <span className="sr-only text-center">Loading...</span>
-              </div>
+              <br />
+              <img src="/assets/images/pez-loop.gif"></img>
             </div>
           </Modal.Body>
         </Modal.Dialog>
