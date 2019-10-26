@@ -1,7 +1,7 @@
 import React from "react";
 import "./Screens.css";
 
-class Home extends React.Component
+class Dashboard extends React.Component
 {
     constructor(props)
     {
@@ -22,4 +22,4 @@ class Home extends React.Component
     }
 }
 
-export default Home;
+export default Dashboard;

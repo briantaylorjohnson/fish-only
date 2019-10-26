@@ -1,7 +1,13 @@
 // src/App.js
 
 import React from "react";
-import NavBar from "./components/Nav";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Modal from "react-bootstrap/Modal";
+import Nav from "./components/Nav";
+import Public from "./screens/Public";
+import Dashboard from "./screens/Dashboard"
+import Reports from "./screens/Reports"
+import Tackle from "./screens/Tackle"
 import Profile from "./components/Profile";
 import { useAuth0 } from "./react-auth0-spa";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
@@ -11,22 +17,46 @@ function App() {
 
   if (loading) {
     return (
-      <div>Loading...</div>
+      <div>
+        <Modal.Dialog>
+          <Modal.Header>
+            <Modal.Title>
+              <div className="text-center">
+              Fish Only
+              </div>
+            </Modal.Title>
+          </Modal.Header>
+
+          <Modal.Body>
+            <div className="text-center">
+              <p className="text-center">Logging in...</p>
+              <div className="spinner-border text-center" role="status">
+                <span className="sr-only text-center">Loading...</span>
+              </div>
+            </div>
+          </Modal.Body>
+        </Modal.Dialog>
+      </div>
     );
   }
 
   return (
     <div className="App">
-      {/* New - use BrowserRouter to provide access to /profile */}
-      <BrowserRouter>
-        <header>
-          <NavBar />
-        </header>
-        <Switch>
-          <Route path="/" exact />
-          <Route path="/profile" component={Profile} />
-        </Switch>
-      </BrowserRouter>
+      <div className="container">
+        <BrowserRouter>
+          <header>
+            <Nav />
+          </header>
+          <Switch>
+            <Route path="/" exact component={Public} />
+            <Route path="/home" component={Dashboard} />
+            <Route path="/reports" component={Reports} />
+            <Route path="/tackle" component={Tackle} />
+            <Route path="/profile" component={Profile} />
+            <Route path="/login" component={Public} />
+          </Switch>
+        </BrowserRouter>
+      </div>
     </div>
   );
 }
@@ -43,7 +73,7 @@ import Footer from "./components/Footer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import './App.css';
 
-class App extends React.Component
+className App extends React.Component
 {
     state =
     {
