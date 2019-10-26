@@ -1,6 +1,6 @@
 import React from "react";
 import "./Screens.css";
-import API from "./utils/API";
+import API from "../utils/API";
 import Results from "../components/Results"
 
 class Reports extends React.Component

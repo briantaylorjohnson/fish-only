@@ -1,4 +1,5 @@
 import React from "react";
+import API from "../../utils/API";
 import "./Report.css";
 
 // Creates Report component for returning a user's fising reports
@@ -11,6 +12,8 @@ class Report extends React.Component
         {
             
         }
+
+        this.handleDeleteReport = this.handleDeleteReport.bind(this);
     }
 
     componentDidMount()
@@ -19,10 +22,29 @@ class Report extends React.Component
         console.log(this.props);
     }
 
+    handleNewReport()
+    {
+
+    }
+
+    handleDeleteReport = (r) =>
+    {
+        r.preventDefault();
+        this.setState({deleted: true});
+        console.log(this.props);
+        const report = { reportId: this.props.id};
+
+        API.deleteReport(report).then((res) =>
+        {
+            console.log(res);
+            window.location.replace("/reports");
+        });
+    }
+
     render()
     {
         return (
-            <div className="container border bd-dark mt-3 mb-3">
+            <div className="container border bd-dark mt-3">
                 <div className="row">
                     <div className="col-md-12 report-location">
                         {this.props.location}
@@ -116,7 +138,7 @@ class Report extends React.Component
                                 </div>
                             </div>
                             
-                            <div className="row pb-3">
+                            <div className="row pb-2">
                                 <div className="col-md-12">
                                     <div className="container border bd-dark mt-1">
                                         <div className="row">
@@ -141,6 +163,11 @@ class Report extends React.Component
                                     </div>
                             </div>
                         </div>
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-md-12 ml-3 mb-2">
+                    <button className="btn btn-outline-success btn-sm mr-1">New</button><button className="btn btn-outline-danger btn-sm ml-1" onClick={this.handleDeleteReport}>Delete</button>
                 </div>
             </div>
         </div>
