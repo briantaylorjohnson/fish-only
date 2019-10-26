@@ -4,7 +4,7 @@ import "./Hero.css";
 // Creates Hero component
 function Hero() {
   return (
-    <div className="jumbotron jumbotron-fluid">
+    <div className="jumbotron jumbotron-fluid mb-4">
         <div className="container">
             <h1 className="display-4">Fish Only!</h1>
             <p className="lead">Connecting humans and fish... one hook at a time!</p>
