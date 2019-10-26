@@ -23,6 +23,7 @@ export function Results(props)
                   length={reportDetails["length"]}
                   location={reportDetails["location"]}
                   notes={reportDetails["notes"]}
+                  released={reportDetails["released"]}
                   species={reportDetails["species"]}
                   tackle={reportDetails["tackle"]}
                   time={reportDetails["time"]}
