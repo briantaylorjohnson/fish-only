@@ -39,9 +39,7 @@ function App() {
     );
   }
 
-  if (typeof user !== "undefined")
-  {
-    return (
+  return (
       <div className="App">
         <div className="container">
           <BrowserRouter>
@@ -61,31 +59,6 @@ function App() {
       </div>
     );
   }
-  else
-  {
-    return (
-      <div>
-        <Modal.Dialog>
-          <Modal.Header>
-            <Modal.Title>
-              <div className="text-center">
-              Fish Only
-              </div>
-            </Modal.Title>
-          </Modal.Header>
-
-          <Modal.Body>
-            <div className="text-center">
-              <p className="text-center">Loading...</p>
-              <br />
-              <img src="/assets/images/pez-loop.gif" alt="El Pez Loop"></img>
-            </div>
-          </Modal.Body>
-        </Modal.Dialog>
-      </div>
-    );
-  }
-}
 
 export default App;
 
