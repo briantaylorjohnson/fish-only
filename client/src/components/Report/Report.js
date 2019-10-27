@@ -18,8 +18,6 @@ class Report extends React.Component
 
     componentDidMount()
     {
-        console.log("Props");
-        console.log(this.props);
     }
 
     handleNewReport()
@@ -155,7 +153,7 @@ class Report extends React.Component
                                             <div className="row">
                                                 <div className="col-md-12 bold-text">
                                                     <small>
-                                                        <span className="bold-text">Notes: </span><br />{this.props.notes}.
+                                                        <span className="bold-text">Notes: </span><br />{this.props.notes}
                                                     </small>
                                                 </div>
                                             </div>

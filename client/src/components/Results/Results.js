@@ -4,14 +4,13 @@ import Report from "../Report"
 
 export function Results(props)
 {
+
   return (
     <div>
     {
         props.reportData.map((report) =>
         {
           const reportDetails = report;
-
-          console.log("Fishing Report: " + reportDetails);
 
           return (
               <Report

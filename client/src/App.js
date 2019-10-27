@@ -13,7 +13,7 @@ import { useAuth0 } from "./react-auth0-spa";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 function App() {
-  const { loading } = useAuth0();
+  const { loading, user } = useAuth0();
 
   if (loading) {
     return (
@@ -31,7 +31,7 @@ function App() {
             <div className="text-center">
               <p className="text-center">Loading...</p>
               <br />
-              <img src="/assets/images/pez-loop.gif"></img>
+              <img src="/assets/images/pez-loop.gif" alt="El Pez Loop"></img>
             </div>
           </Modal.Body>
         </Modal.Dialog>
@@ -39,25 +39,52 @@ function App() {
     );
   }
 
-  return (
-    <div className="App">
-      <div className="container">
-        <BrowserRouter>
-          <header>
-            <Nav />
-          </header>
-          <Switch>
-            <Route path="/" exact component={Public} />
-            <Route path="/home" component={Dashboard} />
-            <Route path="/reports" component={Reports} />
-            <Route path="/tackle" component={Tackle} />
-            <Route path="/profile" component={Profile} />
-            <Route path="/login" component={Public} />
-          </Switch>
-        </BrowserRouter>
+  if (typeof user !== "undefined")
+  {
+    return (
+      <div className="App">
+        <div className="container">
+          <BrowserRouter>
+            <header>
+              <Nav />
+            </header>
+            <Switch>
+              <Route path="/" exact component={Public} />
+              <Route path="/home" component={Dashboard} />
+              <Route path="/reports" render={(props) => <Reports {...props} profile={user} />} />
+              <Route path="/tackle" component={Tackle} />
+              <Route path="/profile" component={Profile} />
+              <Route path="/login" component={Public} />
+            </Switch>
+          </BrowserRouter>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+  else
+  {
+    return (
+      <div>
+        <Modal.Dialog>
+          <Modal.Header>
+            <Modal.Title>
+              <div className="text-center">
+              Fish Only
+              </div>
+            </Modal.Title>
+          </Modal.Header>
+
+          <Modal.Body>
+            <div className="text-center">
+              <p className="text-center">Loading...</p>
+              <br />
+              <img src="/assets/images/pez-loop.gif" alt="El Pez Loop"></img>
+            </div>
+          </Modal.Body>
+        </Modal.Dialog>
+      </div>
+    );
+  }
 }
 
 export default App;
