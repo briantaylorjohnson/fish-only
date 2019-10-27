@@ -1,0 +1,16 @@
+.report-btn-color
+{
+    background-color: #ffffff !important;
+}
+
+.report-btn-color:hover
+{
+    color: #28A745 !important;
+}
+
+.report-btn-color-close
+{
+    background-color: #ffffff !important;
+    color: #6B757D !important;
+}
+

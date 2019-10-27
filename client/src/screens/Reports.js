@@ -34,13 +34,19 @@ class Reports extends React.Component
     {
         return(
             <div>
-                {!(this.state.reportData.length === 0 )?
-                <Results
-                    reportData={this.state.reportData}
-                />
+            {!(this.state.reportData.length === 0 )?
+                <div>
+                    <Results
+                        reportData={this.state.reportData}
+                        profile={this.props.profile}
+                    />
+
+                </div>
                 :
-                console.log("No data")
-                }
+                <div>
+                    {console.log("No data")}
+                </div>
+            }
             </div>
         )
     }

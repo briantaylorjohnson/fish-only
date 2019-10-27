@@ -103,24 +103,26 @@ exports.postReport = (req, res) =>
                 TableName: "reports",
                 Item:
                 {
-                    "user-id":  req.body.username,
-                    "location": req.body.location,
                     "air-temp": req.body.airTemp,
-                    "water-temp": req.body.waterTemp,
-                    "report-id": reportId,
-                    "time": req.body.time,
-                    "weight": req.body.weight,
-                    "geolocation": req.body.geolocation,
-                    "species": req.body.species,
-                    "date": req.body.date,
-                    "tackle": req.body.tackle,
-                    "length": req.body.length,
                     "color": req.body.color,
-                    "wind-direction": req.body.windDirection,
-                    "wind-speed": req.body.windSpeed,
-                    "weather": req.body.weather,
+                    "date": req.body.date,
+                    "deleted": false,
+                    "depth": req.body.depth,
+                    "geolocation": req.body.geolocation,
+                    "length": req.body.length,
+                    "location": req.body.location,
                     "notes": req.body.notes,
-                    "deleted": false
+                    "released": req.body.released,
+                    "report-id": reportId,
+                    "species": req.body.species,
+                    "tackle": req.body.tackle,
+                    "time": req.body.time,
+                    "user-id":  req.body.username,
+                    "water-temp": req.body.waterTemp,
+                    "weather": req.body.weather,
+                    "weight": req.body.weight,
+                    "wind-direction": req.body.windDirection,
+                    "wind-speed": req.body.windSpeed
                 }
             };
 
