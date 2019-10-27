@@ -33,7 +33,8 @@ export function Results(props)
                   windDirection={reportDetails["wind-direction"]}
                   windSpeed={reportDetails["wind-speed"]}
                   key={reportDetails["report-id"]}
-                  id={reportDetails["report-id"]}                  
+                  id={reportDetails["report-id"]}      
+                  profile={props.profile}            
                 />
           )
         }

@@ -1,4 +1,5 @@
 import React from "react";
+import Fmodal from "../Fmodal"
 import API from "../../utils/API";
 import "./Report.css";
 
@@ -165,7 +166,7 @@ class Report extends React.Component
             </div>
             <div className="row">
                 <div className="col-md-12 ml-3 mb-2">
-                    <button className="btn btn-outline-success btn-sm mr-1">New</button><button className="btn btn-outline-danger btn-sm ml-1" onClick={this.handleDeleteReport}>Delete</button>
+                    <Fmodal profile={this.props.profile} /><button className="btn btn-outline-danger btn-sm ml-1" onClick={this.handleDeleteReport}>Delete</button>
                 </div>
             </div>
         </div>
