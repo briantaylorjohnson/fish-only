@@ -17,12 +17,13 @@ class Reports extends React.Component
      componentDidMount()
      {
          this.getReports();
+         console.log("Props: ");
+         console.log(this.props);
      }
 
     getReports = () =>
     {
-        let user = { username: "bigdawgwoods" };
-        console.log("Fetching reports...");
+        let user = { username: this.props.profile.email };
         API.getReports(user).then((res) =>
         {
             this.setState({reportData: res.data.reports});
@@ -33,8 +34,6 @@ class Reports extends React.Component
     {
         return(
             <div>
-                {console.log("Data: ")}
-                {console.log(this.state.reportData)}
                 {!(this.state.reportData.length === 0 )?
                 <Results
                     reportData={this.state.reportData}
