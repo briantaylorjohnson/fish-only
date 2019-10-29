@@ -5,7 +5,7 @@ import { useAuth0 } from "../../react-auth0-spa";
 import "./Profile.css"
 
 const Profile = () => {
-  const { loading, user } = useAuth0();
+  const { user } = useAuth0();
 
 
   const email = () =>

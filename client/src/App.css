@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+
 }
 
 .App-logo {
@@ -19,4 +19,20 @@
 
 .App-link {
   color: #09d3ac;
+}
+
+.page-container {
+  position: relative !important;
+  min-height: 100vh !important;
+}
+
+.content-wrap {
+  padding-bottom: 2.5rem !important;    /* Footer height */
+}
+
+.footer {
+  position: absolute !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  height: 2.5rem !important;            /* Footer height */
 }

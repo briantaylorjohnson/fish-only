@@ -1,4 +1,5 @@
 import React from "react";
+import Fmodal from "../components/Fmodal"
 import "./Screens.css";
 import API from "../utils/API";
 import Results from "../components/Results"
@@ -34,6 +35,7 @@ class Reports extends React.Component
     {
         return(
             <div>
+            <h2>Fishing Reports</h2>
             {!(this.state.reportData.length === 0 )?
                 <div>
                     <Results
@@ -44,6 +46,8 @@ class Reports extends React.Component
                 </div>
                 :
                 <div>
+                    <p>No fishing reports logged.</p>
+                    <Fmodal profile={this.props.profile} />
                     {console.log("No data")}
                 </div>
             }

@@ -1,9 +1,17 @@
 .footer-color
 {
-    background: #212529 !important;
+    background: #343A40 !important;
 }
 
 .footer-text
 {
     color: #FFFFFF !important;
+}
+
+.footer-bottom
+{
+    position:absolute;
+    left:0;
+    bottom:0;
+    right:0;
 }

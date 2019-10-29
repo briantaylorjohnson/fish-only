@@ -29,10 +29,10 @@ const Nav = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div className="navbar-nav">
-            <a className="nav-item nav-link" href="/reports">Fishing Reports</a>
-            <a className="nav-item nav-link" href="/tackle">Tackle Box</a>
-            <a className="nav-item nav-link" href="/profile">Profile</a>
-            <a className="nav-item nav-link logout-point" onClick={() => logout()}>Log Out</a>
+            <a className="nav-item nav-link hamburger-mobile" href="/reports">Fishing Reports</a>
+            <a className="nav-item nav-link hamburger-mobile" href="/tackle">Tackle Box</a>
+            <a className="nav-item nav-link hamburger-mobile" href="/profile">Profile</a>
+            <a className="nav-item nav-link logout-point hamburger-mobile" onClick={() => logout()}>Log Out</a>
           </div>
         </div>
       </nav>
