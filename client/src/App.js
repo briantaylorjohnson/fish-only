@@ -9,8 +9,10 @@ import Dashboard from "./screens/Dashboard"
 import Reports from "./screens/Reports"
 import Tackle from "./screens/Tackle"
 import Profile from "./components/Profile";
+import Footer from "./components/Footer";
 import { useAuth0 } from "./react-auth0-spa";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import "./App.css";
 
 function App() {
   const { loading, user } = useAuth0();
@@ -41,73 +43,30 @@ function App() {
 
   return (
       <div className="App">
-        <div className="container">
-          <BrowserRouter>
+        <div className="page-container">
+          <div className="content-wrap">
             <header>
               <Nav />
             </header>
-            <Switch>
-              <Route path="/" exact component={Public} />
-              <Route path="/home" component={Dashboard} />
-              <Route path="/reports" render={(props) => <Reports {...props} profile={user} />} />
-              <Route path="/tackle" component={Tackle} />
-              <Route path="/profile" component={Profile} />
-              <Route path="/login" component={Public} />
-            </Switch>
-          </BrowserRouter>
+            <div className="container">
+              <BrowserRouter>
+                <Switch>
+                  <Route path="/" exact component={Public} />
+                  <Route path="/home" component={Dashboard} />
+                  <Route path="/reports" render={(props) => <Reports {...props} profile={user} />} />
+                  <Route path="/tackle" component={Tackle} />
+                  <Route path="/profile" component={Profile} />
+                  <Route path="/login" component={Public} />
+                </Switch>
+              </BrowserRouter>
+            </div>
+          </div>
+        <div className="footer">
+          <Footer />
         </div>
       </div>
+    </div>
     );
   }
 
 export default App;
-
-/*import React from 'react';
-import Nav from "./components/Nav";
-import Public from "./screens/Public";
-import Reports from "./screens/Reports";
-import Tackle from "./screens/Tackle";
-import Profile from "./screens/Profile";
-import Footer from "./components/Footer";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import './App.css';
-
-className App extends React.Component
-{
-    state =
-    {
-      loggedIn: false,
-      username: "tswizz",
-      name: "",
-      password: ""
-    };
-
-  render()
-  {
-    return(
-      <div>
-        <div className="container">
-          
-
-          <Nav />
-          
-
-          <Router>
-            <Switch>
-              <Route exact path="/" render={(props) => <Public {...props} loggedIn={this.state.loggedIn} username={this.state.username} name={this.state.name} password={this.state.password} />} />
-              <Route exact path="/reports" render={(props) => <Reports {...props} loggedIn={this.state.loggedIn} username={this.state.username} name={this.state.name} />} />
-              <Route exact path="/tackle" render={(props) => <Tackle {...props} loggedIn={this.state.loggedIn} username={this.state.username} name={this.state.name} />} />
-              <Route exact path="/profile" render={(props) => <Profile {...props} loggedIn={this.state.loggedIn} username={this.state.username} name={this.state.name} />} />
-            </Switch>
-          </Router>
-
-          <Footer />
-        </div>
-      </div>
-    )
-  }
-}
-
-export default App;
-
-*/
