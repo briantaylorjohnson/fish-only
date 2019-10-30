@@ -17,3 +17,14 @@
 {
     font-weight: bold;
 }
+
+.gmaps-icon
+{
+    max-width: 20px;
+    height: auto;
+}
+
+.geolocate-text
+{
+    color: black !important;
+}

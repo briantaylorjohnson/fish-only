@@ -8,7 +8,40 @@ function Fmodal(props) {
   
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-  
+    
+    let geoCoordsURL = "TBD";
+
+    let dropPin = (pin) =>
+    {
+        let geotag = document.getElementById("geotag");
+        let geotagButton = document.getElementById("geotag-button");
+
+        geoCoordsURL = "https://www.google.com/maps/search/?api=1&query=" + pin.coords.latitude + "," + pin.coords.longitude;
+        console.log("Pin has been dropped!");
+        console.log(geoCoordsURL);
+
+        geotagButton.style.display = "none"; 
+        geotag.className = "font-weight-bold";
+        geotag.innerHTML = "Wahoo! Current location has been saved.";
+    }
+
+    let geolocateReport = (g) =>
+    {
+        g.preventDefault();
+
+        let geotag = document.getElementById("geotag");
+
+        if (navigator.geolocation)
+        { 
+            navigator.geolocation.getCurrentPosition(dropPin);
+        }
+        else
+        { 
+            console.log("Geolocation is not supported by this browser.");
+            geotag.innerHTML = "Oops! Looks like your browser doesn't support geolocation...";
+        }
+    }
+
     const saveReport = (user) =>
     {
         let date = document.getElementById("fish-date-month").value + " " + document.getElementById("fish-date-day").value + ", " + document.getElementById("fish-date-year").value;
@@ -21,7 +54,7 @@ function Fmodal(props) {
             "color": document.getElementById("fish-color").value,
             "date": date,
             "depth": document.getElementById("fish-depth").value,
-            "geolocation": "TBD",
+            "geolocation": geoCoordsURL,
             "length": document.getElementById("fish-length").value,
             "location": document.getElementById("fish-location").value,
             "notes": document.getElementById("fish-notes").value,
@@ -61,6 +94,12 @@ function Fmodal(props) {
                     <div className="form-group col-md-12">
                         <small><label>Location:</label></small>
                         <input type="text" className="form-control" id="fish-location"></input>
+                    </div>
+                </div>
+                <div className="form-row">
+                    <div className="form-group col-md-12">
+                        <button id="geotag-button" className="btn btn-sm btn-primary" onClick={geolocateReport}>Geolocate</button>
+                        <p><small id="geotag" className="">Remember to enable geolocation!</small></p>
                     </div>
                 </div>
                 <div className="form-row">
