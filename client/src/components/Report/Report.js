@@ -19,6 +19,7 @@ class Report extends React.Component
 
     componentDidMount()
     {
+
     }
 
     handleNewReport()
@@ -54,11 +55,15 @@ class Report extends React.Component
                         {this.props.date} -- {this.props.time}
                     </div>
                 </div>
+                {!(this.props.geolocation === "TBD")?
                 <div className="row">
-                    <div className="col-md-6 geolocate">
-                        <small>Pinpoint on Google Maps</small>
+                    <div id="geolocation" className="col-md-12 geolocation">
+                        <small className="geolocate-text"><a href={this.props.geolocation} target="_blank" title="Pinpoint with Google Maps" className="geolocate-text"><img className="gmaps-icon" src="/assets/images/gmaps.svg" alt="Pinpoint in Google Maps"/>Pinpoint in Google Maps</a></small>
                     </div>
                 </div>
+                :
+                null
+                }
                 <div className="row">
                     <div className="col-md-12">
                         <div className="container">
