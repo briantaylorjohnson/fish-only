@@ -4,6 +4,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Modal from "react-bootstrap/Modal";
 import Nav from "./components/Nav";
+import Welcome from "./components/Welcome";
 import Public from "./screens/Public";
 import Dashboard from "./screens/Dashboard"
 import Reports from "./screens/Reports"
@@ -47,6 +48,7 @@ function App() {
           <div className="content-wrap">
             <header>
               <Nav />
+              <Welcome />
             </header>
             <div className="container">
               <BrowserRouter>
