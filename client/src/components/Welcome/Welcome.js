@@ -29,7 +29,7 @@ const Welcome = () => {
   return (
     <Fragment>
         <div>
-            {!(typeof user === "undefined")? <div className="container"> You are logged in as: {user.nickname}!</div> : <div>Log in to view your fishing reports!</div>}
+            {!(typeof user === "undefined")? <div className="container"> You are logged in as: {user.nickname}!</div> : <div className="container">Log in to view your fishing reports!</div>}
         </div>
     </Fragment>
   );
