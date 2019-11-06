@@ -39,8 +39,7 @@ exports.getTackle = (req, res) =>
                 "code": 500,
                 "outcome": "Error",
                 "message": "Error retrieving tackle from AWS DynamoDB table.",
-                "details": report_err,
-                "data": data
+                "details": report_err
             });
         }
 

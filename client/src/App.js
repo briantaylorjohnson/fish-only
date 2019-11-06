@@ -56,7 +56,7 @@ function App() {
                   <Route path="/" exact component={Public} />
                   <Route path="/home" component={Dashboard} />
                   <Route path="/reports" render={(props) => <Reports {...props} profile={user} />} />
-                  <Route path="/tackle" component={Tackle} />
+                  <Route path="/tackle" render={(props) => <Tackle {...props} profile={user} />} />
                   <Route path="/profile" component={Profile} />
                   <Route path="/login" component={Public} />
                 </Switch>
