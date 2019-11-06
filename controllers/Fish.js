@@ -11,6 +11,51 @@ AWS.config.update({
     region: "us-east-1"
 });
 
+// Retreives all of the tackle for a FishOnly.com user
+exports.getTackle = (req, res) =>
+{
+    let docClient = new AWS.DynamoDB.DocumentClient();
+
+    let params =
+    {
+        TableName: "tackle",
+        FilterExpression: "#username = :val and #deleted = :bool",
+        ExpressionAttributeNames: {
+            "#username":"user-id",
+            "#deleted":"deleted"
+        },
+        ExpressionAttributeValues: {":val": req.body.username, ":bool": false},
+        ReturnConsumedCapacity: "TOTAL"
+    };
+
+    // Queries AWS DynamoDB with the above parameters
+    docClient.scan(params, (report_err, data) =>
+    {   
+        // Checks to see if any errors occured while attempting to send auth parameters to AWS DynamoDB
+        if (report_err)
+        {
+            res.json(
+            {
+                "code": 500,
+                "outcome": "Error",
+                "message": "Error retrieving tackle from AWS DynamoDB table.",
+                "details": report_err,
+                "data": data
+            });
+        }
+
+        else
+        {
+            res.json(
+            {
+                "code": 200,
+                "outcome": "Success",
+                "message": "Tackle successfully retrieved from AWS DynamoDB table",
+                "tackle": data.Items
+            });
+        }
+    }); 
+};
 
 // Retrieves all of the fishing reports for a FishOnly.com user
 exports.getReports = (req, res) => 

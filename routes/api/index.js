@@ -23,4 +23,7 @@ router.post("/authUser", fishController.authUser);
 // Update FishOnly.com user profile attributes
 router.post("/updateUser", fishController.updateUserAttribute);
 
+// Retrieve FishOnly.com tackle saved to AWS DynamoDB
+router.post("/tackle", fishController.getTackle);
+
 module.exports = router;
