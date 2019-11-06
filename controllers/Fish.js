@@ -97,6 +97,19 @@ exports.postReport = (req, res) =>
             count += 1;
             reportId = req.body.username + count;
 
+            let notes = "None";
+            let tackle = "None";
+            
+            if(req.body.notes !== "")
+            {
+                notes = req.body.notes;
+            }
+
+            if(req.body.tackle !== "")
+            {
+                tackle = req.body.tackle;
+            }
+
             // Fishing report data to be stored in AWS DynamoDB table
             let params = 
             {
@@ -111,11 +124,11 @@ exports.postReport = (req, res) =>
                     "geolocation": req.body.geolocation,
                     "length": req.body.length,
                     "location": req.body.location,
-                    "notes": req.body.notes,
+                    "notes": notes,
                     "released": req.body.released,
                     "report-id": reportId,
                     "species": req.body.species,
-                    "tackle": req.body.tackle,
+                    "tackle": tackle,
                     "time": req.body.time,
                     "user-id":  req.body.username,
                     "water-temp": req.body.waterTemp,

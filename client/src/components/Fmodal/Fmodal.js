@@ -89,11 +89,11 @@ function Fmodal(props) {
             <Modal.Title>New Fishing Report</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <form>
+            <form onSubmit={saveReport} className="was-validated" novalidate>
                 <div className="form-row">
                     <div className="form-group col-md-12">
                         <small><label>Location:</label></small>
-                        <input type="text" className="form-control" id="fish-location"></input>
+                        <input type="text" className="form-control" id="fish-location" name="fish-location" required/>
                     </div>
                 </div>
                 <div className="form-row">
@@ -236,27 +236,27 @@ function Fmodal(props) {
                 <div className="form-row">
                     <div className="form-group col-md-6">
                         <small><label>Species:</label></small>
-                        <input type="text" className="form-control" id="fish-species"></input>
+                        <input type="text" className="form-control" id="fish-species" name="fish-species" required></input>
                     </div>
                     <div className="form-group col-md-6">
                         <small><label>Color:</label></small>
-                        <input type="text" className="form-control" id="fish-color"></input>
+                        <input type="text" className="form-control" id="fish-color" name="fish-color" required></input>
                     </div>
                 </div>
                 <div className="form-row">
                     <div className="form-group col-md-6">
                         <small><label>Weight (lbs):</label></small>
-                        <input type="text" className="form-control" id="fish-weight"></input>
+                        <input type="text" className="form-control" id="fish-weight" name="fish-weight" required></input>
                     </div>
                     <div className="form-group col-md-6">
                         <small><label>Length (in):</label></small>
-                        <input type="text" className="form-control" id="fish-length"></input>
+                        <input type="text" className="form-control" id="fish-length" name="fish-length" required></input>
                     </div>
                 </div>
                 <div className="form-row">
                     <div className="form-group col-md-12">
                         <small><label>Released?</label></small>
-                        <select className="form-control" id="fish-released">
+                        <select className="form-control" id="fish-released" name="fish-released" required>
                             <option>Yes</option>
                             <option>No</option>
                         </select>
@@ -265,51 +265,49 @@ function Fmodal(props) {
                 <div className="form-row">
                     <div className="form-group col-md-9">
                         <small><label>Weather:</label></small>
-                        <input type="text" className="form-control" id="fish-weather"></input>
+                        <input type="text" className="form-control" id="fish-weather" name="fish-weather" required></input>
                     </div>
                     <div className="form-group col-md-3">
                         <small><label>Depth (ft):</label></small>
-                        <input type="text" className="form-control" id="fish-depth"></input>
+                        <input type="text" className="form-control" id="fish-depth" name="fish-depth" required></input>
                     </div>
                 </div>
                 <div className="form-row">
                     <div className="form-group col-md-3">
                         <small><label>Air Temp (f):</label></small>
-                        <input type="text" className="form-control" id="fish-air-temp"></input>
+                        <input type="text" className="form-control" id="fish-air-temp" name="fish-air-temp" required></input>
                     </div>
                     <div className="form-group col-md-3">
                         <small><label>Water Temp (f):</label></small>
-                        <input type="text" className="form-control" id="fish-water-temp"></input>
+                        <input type="text" className="form-control" id="fish-water-temp" name="fish-water-temp" required></input>
                     </div>
                     <div className="form-group col-md-3">
                         <small><label>Wind Direction:</label></small>
-                        <input type="text" className="form-control" id="fish-wind-direction"></input>
+                        <input type="text" className="form-control" id="fish-wind-direction" name="fish-wind-direction" required></input>
                     </div>
                     <div className="form-group col-md-3">
                         <small><label>Wind Speed (kts):</label></small>
-                        <input type="text" className="form-control" id="fish-wind-speed"></input>
+                        <input type="text" className="form-control" id="fish-wind-speed" name="fish-wind-speed" required></input>
                     </div>
                 </div>
                 <div className="form-row">
                     <div className="form-group col-md-12">
                         <small><label>Tackle:</label></small>
-                        <textarea type="text" className="form-control" id="fish-tackle" rows="2"></textarea>
+                        <textarea type="text" className="form-control" id="fish-tackle" rows="2" name="fish-tackle" ></textarea>
                     </div>
                 </div>
                 <div className="form-row">
                     <div className="form-group col-md-12">
                         <small><label>Notes:</label></small>
-                        <textarea className="form-control" id="fish-notes" rows="2"></textarea>
+                        <textarea className="form-control" id="fish-notes" rows="2" name="fish-notes" ></textarea>
                     </div>
                 </div>
+                <button type="submit" class="btn btn-outline-success btn-sm report-btn-color">Save Report</button>
             </form>
           </Modal.Body>
           <Modal.Footer>
             <Button className="report-btn-color-close btn-sm" variant="secondary" onClick={handleClose}>
               Close
-            </Button>
-            <Button className="btn btn-outline-success btn-sm report-btn-color" variant="primary" onClick={saveReport}>
-              Save Report
             </Button>
           </Modal.Footer>
         </Modal>
