@@ -7,23 +7,6 @@ import "./Welcome.css"
 const Welcome = () => {
   const { user } = useAuth0();
 
-
-  const email = () =>
-  {
-    let verifiedEmail = "";
-
-    if (user.email_verified === true)
-    {
-      verifiedEmail = "Yes";
-    }
-    else
-    {
-      verifiedEmail = "No";
-    }
-
-    return verifiedEmail;
-  }
-
   console.log("Profile: " + JSON.stringify(user, null, 2));
 
   return (

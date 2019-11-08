@@ -55,6 +55,133 @@ exports.getTackle = (req, res) =>
         }
     }); 
 };
+// Creates a new tackle box item for a FishOnly.com user
+exports.saveTackle = (req, res) =>
+{
+    let docClient = new AWS.DynamoDB.DocumentClient();
+
+    let params = 
+    {
+        TableName: "tackle",
+        FilterExpression: "#username = :val",
+        ExpressionAttributeNames: {
+            "#username":"user-id"
+        },
+        ExpressionAttributeValues: {":val": req.body.username},
+        ReturnConsumedCapacity: "TOTAL"
+    };
+
+    // Queries AWS DynamoDB with the above parameters
+    docClient.scan(params, (count_err, data) =>
+    {   
+        // Checks to see if any errors occured while attempting to count the user's fishing reports in AWS DynamoDB
+        if (count_err)
+        {
+            res.json(
+            {
+                "code": 500,
+                "outcome": "Error",
+                "message": "Error counting fishing reports from AWS DynamoDB table.",
+                "details": count_err
+            });
+        }
+
+        // Posts a new tackle box item to the AWS DynamoDB table for the user
+        else
+        {
+            // Creates a unique tackle box item ID by concatenating the username with the count of tackle box items for user plus one (count + 1)
+            let count = data.Count;
+            count += 1;
+            tackleId = req.body.username + count;
+
+            let notes = "None";
+            
+            if(req.body.notes !== "")
+            {
+                notes = req.body.notes;
+            }
+
+            // Fishing report data to be stored in AWS DynamoDB table
+            let params = 
+            {
+                TableName: "tackle",
+                Item:
+                {
+                    "name": req.body.name,
+                    "description": req.body.description,
+                    "notes": notes,
+                    "deleted": false,
+                    "quantity": req.body.quantity,
+                    "tackle-id": tackleId,
+                    "user-id": req.body.username
+                }
+            };
+
+            // Posts a new tackle box item in the AWS DynamoDB table with the above parameters
+            docClient.put(params, (save_err, data) =>
+            {
+                if (save_err)
+                {
+                    res.json(
+                    {
+                        "code": 500,
+                        "outcome": "Error",
+                        "message": "Error saving new tackle - " + req.body.name + ".",
+                        "details": save_err
+                    });
+                }
+                else
+                {
+                    res.json(
+                    {
+                        "code": 200,
+                        "outcome": "Success",
+                        "message": "New tackle successfully saved - " + req.body.name + "."
+                    });
+                }
+            });
+        }
+    });
+}
+
+// Delete tackle box item for a FishOnly.com user
+exports.deleteTackle = (req, res) =>
+{
+    let docClient = new AWS.DynamoDB.DocumentClient();
+    
+    let params = 
+    {
+        TableName: "tackle",
+        Key: {"tackle-id": req.body.tackleId},
+        UpdateExpression: "set #del = :d",
+        ExpressionAttributeNames:
+        {
+            "#del": "deleted"
+        },
+        ExpressionAttributeValues: {":d": true},
+    }
+
+    docClient.update(params, function(delete_err, data) 
+    {
+        if (delete_err) {
+            res.json(
+            {
+                "code": 500,
+                "outcome": "Error",
+                "message": "Error encountered deleting tackle box item: " + req.body.tackleId + ".",
+                "details": delete_err
+            });
+
+        } else {
+            res.json(
+            {
+                "code": 200,
+                "outcome": "Success",
+                "message": "The tackle box item has been deleted: " + req.body.tackleId + ".",
+            });
+        }
+    });
+}
 
 // Retrieves all of the fishing reports for a FishOnly.com user
 exports.getReports = (req, res) => 

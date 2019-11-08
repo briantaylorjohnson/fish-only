@@ -1,4 +1,6 @@
 import React from "react";
+import Tmodal from "../components/Tmodal";
+import List from "../components/List";
 import "./Screens.css";
 import API from "../utils/API";
 
@@ -9,7 +11,7 @@ class Tackle extends React.Component
         super(props);
         this.state = 
         {
-            reportData: []
+            tackleData: []
         }
     }
 
@@ -34,7 +36,27 @@ class Tackle extends React.Component
     {
         return(
             <div>
-                Tackle Box Here
+            <h2>Your Tackle Box</h2>
+            {!(this.state.tackleData.length === 0 )?
+                <div>
+                    <div className="pb-2">
+                        <Tmodal profile={this.props.profile} />
+                    </div>
+                    <div>
+                        <List
+                            tackleData={this.state.tackleData}
+                            profile={this.props.profile}
+                        />
+
+                    </div>
+                </div>
+                :
+                <div>
+                    <p>No fishing tackle in your supply.</p>
+                    <Tmodal profile={this.props.profile} />
+                    {console.log("No data")}
+                </div>
+            }
             </div>
         )
     }
