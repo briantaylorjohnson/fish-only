@@ -26,4 +26,10 @@ router.post("/updateUser", fishController.updateUserAttribute);
 // Retrieve FishOnly.com tackle saved to AWS DynamoDB
 router.post("/tackle", fishController.getTackle);
 
+// Save FishOnly.com tackle saved to AWS DynamoDB
+router.post("/saveTackle", fishController.saveTackle);
+
+// Delete FishOnly.com tackle from AWS DynamoDB
+router.post("/deleteTackle", fishController.deleteTackle);
+
 module.exports = router;
