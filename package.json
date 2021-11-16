@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/briantaylorjohnson/fish-only#readme",
   "dependencies": {
-    "aws-sdk": "^2.551.0",
+    "aws-sdk": "^2.814.0",
     "axios": "^0.19.0",
     "bcrypt": "^3.0.6",
     "dotenv": "^8.2.0",
